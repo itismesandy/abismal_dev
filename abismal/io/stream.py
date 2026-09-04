@@ -99,7 +99,7 @@ class StreamLoader(StreamLoaderBase):
         asu = tf.ones_like(I, dtype='int64') * self.asu_id
         wavelength = tf.ones_like(I) * wavelength
 
-        data = ((asu, hkl, d, wavelength, metadata, I, SigI), (I,))
+        data = ((asu, hkl, d, wavelength, metadata, I, SigI), (I,)) #TO CHANGE?
         return data
 
     def _parse_chunk(self, *args, **kwargs):

@@ -3,6 +3,7 @@ from abismal.symmetry import Op
 import tf_keras as tfk
 #from abismal.layers import Standardize,Normalize
 from abismal.layers.normalization import StandardizeIntensities,StandardizeMetadata
+from abismal.io.utils import unpack_inputs
 
 def to_indexed_slices(tensor):
     """

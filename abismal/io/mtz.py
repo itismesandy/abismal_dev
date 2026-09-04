@@ -112,7 +112,7 @@ class MTZLoader(DataLoader):
         wavelength = tf.ones_like(I) * self.wavelength
         ASU = tf.ones_like(I, dtype='int32') * self.asu_id
 
-        tfds = tf.data.Dataset.from_tensor_slices(
+        tfds = tf.data.Dataset.from_tensor_slices(      #TO CHANGE?
             ((ASU, HKL, d, wavelength, Metadata, I, SigI), (I,)),
         )
 

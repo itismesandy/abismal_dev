@@ -4,6 +4,7 @@ from tensorflow_probability import bijectors as tfb
 from tensorflow.python.ops.ragged import ragged_tensor
 import tf_keras as tfk
 from abismal.distributions import FoldedNormal,Rice
+from abismal.io.utils import unpack_inputs
 
 def _normalize(x, axis, epsilon=1e-3):
     out = (
@@ -374,15 +375,8 @@ class ImageScaler(tfk.models.Model):
         return self.posterior_dict[self.posterior_name](output, self.bijector_function)
 
     def build(self, shapes):
-        (
-            asu_id,
-            hkl,
-            resolution,
-            wavelength,
-            metadata,
-            iobs,
-            sigiobs,
-        ) = shapes
+        shapes = unpack_inputs(shapes)  #CHANGED
+        metadata = shapes["metadata"]
 
         n = 2
         dimage = metadata[-1] + n
@@ -422,15 +416,12 @@ class ImageScaler(tfk.models.Model):
         return out
 
     def call(self, inputs, mc_samples=32, training=None, **kwargs):
-        (
-            asu_id,
-            hkl,
-            resolution,
-            wavelength,
-            metadata,
-            iobs,
-            sigiobs,
-        ) = inputs
+        inputs = unpack_inputs(inputs) #CHANGED
+        hkl = inputs["hkl"]
+        resolution = inputs["resolution"]
+        metadata = inputs["metadata"]
+        iobs = inputs["iobs"]
+        sigiobs = inputs["sigiobs"]
 
         n = 2
         noise = 0.
