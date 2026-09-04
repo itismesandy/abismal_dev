@@ -212,7 +212,7 @@ class StillsLoader(DataLoader):
         SigI = tf.RaggedTensor.from_value_rowids(SigI, batch)
         asu = tf.ones_like(I, dtype='int32') * asu_id
 
-        data = ((asu, hkl, d, wavelength, metadata, I, SigI), (I,)) #TO CHANGE?
+        data = ((asu, hkl, d, wavelength, metadata, I, SigI), (I,)) 
 
         return data
 
